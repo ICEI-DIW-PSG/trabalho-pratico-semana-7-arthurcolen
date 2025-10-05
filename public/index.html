@@ -87,25 +87,12 @@
 
                 <div class="dashboard-grid">
                     <section class="main-section">
-                        <article class="card-style next-appointment">
-                            <header class="card-style-header">
-                                <h3 class="card-style-title">
-                                    <i class="fa-regular fa-clock"></i>
-                                    Próximo Compromisso
-                                </h3>
-                            </header>
-                            <div class="card-style-content">
-                                <div class="appointment-info">
-                                    <div class="appointment-icon">
-                                        <i class="fa-regular fa-calendar fa-xl"></i>
-                                    </div>
-                                    <div class="appointment-details">
-                                        <h4>Evento XPTO</h4>
-                                        <p class="appointment-time">11:00 - 14:00</p>
-                                        <p class="appointment-desc">Detalhes: "Aqui temos detalhes do evento"</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <article class="card-style next-appointment" id="next-appointment">
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    getNextAppointment();
+                                });
+                            </script>
                         </article>
 
                         <article class="card-style">
@@ -114,56 +101,12 @@
                                     Atividades do Dia
                                 </h3>
                             </header>
-                            <div class="row">
-                                <div class="col-12 col-sm-6 col-lg-4 card-style-content">
-                                    <div class="activity-item activity-blue">
-                                        <div class="activity-header">
-                                            <i class="fa-solid fa-list"></i>
-                                            <span class="text">Tarefa</span>
-                                        </div>
-                                        <p>09:00 - 11:00</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-6 col-lg-4 card-style-content">
-                                    <div class="activity-item activity-green">
-                                        <div class="activity-header">
-                                            <i class="fa-regular fa-calendar"></i>
-                                            <span class="text">Evento</span>
-                                        </div>
-                                        <p>11:00 - 14:00</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-6 col-lg-4 card-style-content">
-                                    <div class="activity-item activity-purple">
-                                        <div class="activity-header">
-                                            <i class="fas fa-book"></i>
-                                            <span class="text">Estudo</span>
-                                        </div>
-                                        <p>14:00 - 18:00</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-6 col-lg-4 card-style-content">
-                                    <div class="activity-item activity-orange">
-                                        <div class="activity-header">
-                                            <i class="fas fa-book"></i>
-                                            <span class="text">Estudo</span>
-                                        </div>
-                                        <p>20:00 - 23:00</p>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-6 col-lg-4">
-                                    <div class="activity-item activity-pink">
-                                        <div class="activity-header">
-                                            <i class="fas fa-book"></i>
-                                            <span class="text">Estudo</span>
-                                        </div>
-                                        <p>23:00 - 23:30</p>
-                                    </div>
-                                </div>
+                            <div class="row" id="activities-cards">
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        loadMainActivities();
+                                    });
+                                </script>
                             </div>
                         </article>
                     </section>
@@ -171,11 +114,17 @@
                     <aside class="stats-section">
                         <article class="card-style stats-card-style">
                             <header class="card-style-header">
-                                <h3 class="card-style-title">Total de Hoje</h3>
+                                <h3 class="card-style-title">Atividades programadas</h3>
                             </header>
                             <div class="card-style-content">
-                                <div class="stats-number">7</div>
-                                <p class="stats-text">Atividades programadas</p>
+                                <div id="stats-number">
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            totalActivities();
+                                        });
+                                    </script>
+                                </div>
+                                <p class="stats-text">Atividades Registradas</p>
                             </div>
                         </article>
 
