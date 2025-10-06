@@ -80,7 +80,7 @@ p#user {
 }
 
 .nav-item-style {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .nav-link-style {
@@ -187,6 +187,11 @@ article header .card-style-title {
 }
 .card-style-content {
     padding: 0 1.25rem 1.25rem;
+}
+
+.card-style-content a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Próximo Compromisso */

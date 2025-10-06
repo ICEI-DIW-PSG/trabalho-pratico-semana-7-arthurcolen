@@ -70,6 +70,19 @@ dados = [
         "local": "Praça da Estação",
         "categoria": "Atividade Física",
         "icone": "fa-solid fa-dumbbell"
+    },
+    
+    {
+        "id": 7,
+        "titulo": "Consulta Oftalmologista",
+        "descricao": "Consulta trimestral para avaliação da condição atual do astigmatismo da minha avó. Buscar ela com antecedência e também planejar chegar mais cedo, pois o trânsito estará ruim.",
+        "data": {
+            "dataInicio": "2025-10-21 08:30:00",
+            "dataFim": "2025-10-21 10:30:00"
+        },
+        "local": "Hospital Life Center",
+        "categoria": "Saúde",
+        "icone": "fa-solid fa-stethoscope"
     }
 
 ]
@@ -82,13 +95,15 @@ function loadMainActivities() {
         let fim = activity.data.dataFim ? activity.data.dataFim.slice(5, 13) : ""
         container.innerHTML += `
         <div class="col-12 col-sm-6 col-lg-4 card-style-content">
-            <div class="activity-item activity-color">
-                <div class="activity-header">
-                    <i class="${activity.icone}"></i>
-                    <span class="text">${activity.categoria}</span>
+            <a href="details.html?id=${activity.id}">
+                <div class="activity-item activity-color">
+                    <div class="activity-header">
+                        <i class="${activity.icone}"></i>
+                        <span class="text">${activity.categoria}</span>
+                    </div>
+                    <p>${inicio}h | ${fim}h</p>
                 </div>
-                <p>${inicio}h | ${fim}h</p>
-            </div>
+            </a>
         </div>`;
     }
 
@@ -139,4 +154,66 @@ function totalActivities() {
     const container = document.getElementById('stats-number')
     let total = dados.length
     container.innerHTML = total
+}
+
+function getActivity() {
+    let params = new URLSearchParams(location.search)
+    let id = params.get('id')
+    let activity = dados.find(function (elem) { return elem.id == id })
+    if (activity) {
+        let tela = document.getElementById('next-appointment');
+        tela.innerHTML = `
+            <header class="card-style-header">
+                <h3 class="card-style-title">
+                    ${activity.categoria}
+                </h3>
+            </header>
+            <div class="card-style-content">
+                <div class="appointment-info">
+                    <div class="appointment-icon">
+                        <i class="${activity.icone} fa-xl"></i>
+                    </div>
+                    <div class="appointment-details">
+                        <h4>${activity.titulo}</h4>
+                        <p class="appointment-time"> ${activity.data.dataInicio} | ${activity.data.dataFim} </p>
+                        <p class="appointment-desc"><i class="fa-solid fa-location-dot"></i></i> ${activity.local}</p>
+                        <p class="appointment-desc">${activity.descricao}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function loadActivitiesByCategory() {
+    let params = new URLSearchParams(location.search);
+    let id = Number(params.get('id'));
+    let referenceActivity = dados.find(elem => elem.id === id);
+
+    if (!referenceActivity) return;
+
+    let category = referenceActivity.categoria;
+    let filteredActivities = dados.filter(elem => elem.categoria === category);
+
+    const container = document.getElementById('activities-cards');
+
+    container.innerHTML = '';
+
+    filteredActivities.forEach(activity => {
+        let inicio = activity.data.dataInicio ? activity.data.dataInicio.slice(5, 16) : "";
+        let fim = activity.data.dataFim ? activity.data.dataFim.slice(5, 16) : "";
+
+        container.innerHTML += `
+        <div class="col-12 col-sm-6 col-lg-4 card-style-content">
+            <a href="details.html?id=${activity.id}">
+                <div class="activity-item activity-color">
+                    <div class="activity-header">
+                        <i class="${activity.icone}"></i>
+                        <span class="text">${activity.categoria}</span>
+                    </div>
+                    <p>${inicio}h | ${fim}h</p>
+                </div>
+            </a>
+        </div>`;
+    });
 }
